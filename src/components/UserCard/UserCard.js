@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import avatar from '../../image/user.jpg'
 
 const useStyles = () => ({
-    root:{
+    root: {
         width: '100%'
     },
     card: {
@@ -36,8 +36,11 @@ class UserCard extends React.Component {
                 <Card className={classes.card}>
                     <CardContent>
                         <div className={classes.avatar}>
-                            <img className={classes.avatar} src={avatar}/>
+                            <img className={classes.avatar} src={avatar} />
                         </div>
+                        <Typography className={classes.title} color="textSecondary" gutterBottom>
+                            <label>ID: {this.props.id}</label>
+                        </Typography>
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
                             <label>Name: {this.props.name}</label>
                         </Typography>
