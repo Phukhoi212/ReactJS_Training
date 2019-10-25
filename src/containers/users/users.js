@@ -16,19 +16,25 @@ const useStyles = (theme) => ({
 })
 
 class Users extends React.Component {
-
-    state = {
-        usersList: []
+    constructor(props){       
+        super(props)
+        this.state = {
+            usersList: []
+        }
     }
+        
     componentDidMount() {
-        axios({
-            method: 'get',
-            url: 'https://jsonplaceholder.typicode.com/users'
-        }).then(res => {
-            this.setState({
-                usersList: res.data
-            })
-        }).catch(err => { console.log('err', err) });
+        this.getUsers()
+    }
+
+    getUsers = async () => {
+        const res = await axios.get('https://jsonplaceholder.typicode.com/users');
+        this.setState({ 
+            usersList: res.data 
+        });
+    };
+
+    componentWillUnmount(){
     }
 
     render() {
@@ -36,7 +42,6 @@ class Users extends React.Component {
         const { classes } = this.props
         return (
             <Grid container>
-
                 {usersList.map(user =>
                     <Grid xs={3}>
                         <UserCard
@@ -49,7 +54,6 @@ class Users extends React.Component {
                         />
                     </Grid>
                 )}
-
             </Grid>
         );
     }

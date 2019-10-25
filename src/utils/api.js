@@ -1,1 +1,1 @@
-const apiCall = 'https://jsonplaceholder.typicode.com/users'
+const baseUrl = 'https://jsonplaceholder.typicode.com'
