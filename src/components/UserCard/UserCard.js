@@ -5,7 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import avatar from '../../image/avatar.jpg'
+import avatar from '../../image/user.jpg'
 
 const useStyles = () => ({
     root:{
@@ -13,7 +13,6 @@ const useStyles = () => ({
     },
     card: {
         margin: '2rem',
-
     },
     title: {
         fontSize: 14,
@@ -37,12 +36,12 @@ class UserCard extends React.Component {
                 <Card className={classes.card}>
                     <CardContent>
                         <div className={classes.avatar}>
-                            <img src={avatar}/>
+                            <img className={classes.avatar} src={avatar}/>
                         </div>
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
                             <label>Name: {this.props.name}</label>
                         </Typography>
-                        <Typography variant="h5" component="h2">
+                        <Typography component="h2">
                             <label>UserName: {this.props.username}</label>
                         </Typography>
                         <Typography className={classes.pos} color="textSecondary">

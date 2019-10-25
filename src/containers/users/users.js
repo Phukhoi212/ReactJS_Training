@@ -35,18 +35,20 @@ class Users extends React.Component {
         const { usersList = [] } = this.state
         const { classes } = this.props
         return (
-            <Grid container spacing={3}>
-                <Grid xs={3}>
-                        {usersList.map(user =>
-                            <UserCard
-                                className={classes.paper}
-                                key={user.id}
-                                name={user.name}
-                                username={user.username}
-                                email={user.email}
-                            />
-                        )}
-                </Grid>
+            <Grid container>
+
+                {usersList.map(user =>
+                    <Grid xs={3}>
+                        <UserCard
+                            className={classes.paper}
+                            key={user.id}
+                            name={user.name}
+                            username={user.username}
+                            email={user.email}
+                        />
+                    </Grid>
+                )}
+
             </Grid>
         );
     }
