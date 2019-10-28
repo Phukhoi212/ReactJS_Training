@@ -34,7 +34,7 @@ class UserCard extends React.Component {
                 <Card className={classes.card}>
                     <CardContent>
                         <div className={classes.avatar}>
-                            <img className={classes.avatar} src={avatar} />
+                            <img alt="" className={classes.avatar} src={avatar} />
                         </div>
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
                             <label>ID: {this.props.id}</label>
