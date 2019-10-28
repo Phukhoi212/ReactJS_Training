@@ -42,7 +42,7 @@ class Users extends React.Component {
         const { classes } = this.props
         return (
             <Grid container>
-                {usersList.map((user, index) =>
+                {usersList.map(user =>
                     <Grid item xs={3} key={user.id}>
                         <UserCard
                             className={classes.paper}
