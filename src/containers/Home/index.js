@@ -18,7 +18,7 @@ class Home extends Component {
   }
 
   getListFilm = async () => {
-    const response = await axios.get('https://itunes.apple.com/us/rss/topmovies/limit=1/json')
+    const response = await axios.get('https://itunes.apple.com/us/rss/topmovies/limit=5/json')
     this.setState({
       listFilm: response.data
     })
@@ -26,15 +26,16 @@ class Home extends Component {
 
 
   render() {
-    const entry = get(this.state.listFilm.feed, 'entry', '')
-    const image = get(entry, 'im:image.[2].label', '')
+    const entry = this.state.listFilm.feed
+    //const 
+    //const image = entry.map(en => get(en, 'im:image.[2].label', '')) 
     const title = get(entry, 'im:name.label', '')
-    console.log('-->list', title)
+    console.log('-->list', entry)
     return (
       <div >
         <NavBar />
         {/* <ReactPlayer url='https://www.youtube.com/watch?v=dZFa22qfktM' playing /> */}
-        <Card imageFilm={image} title={title} />
+        {/* <Card imageFilm={image} title={title} /> */}
       </div>
     )
   }
