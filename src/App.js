@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
-import Users from '../src/containers/users/users'
+import Home from '../src/containers/Home/index'
 
-function App() {
-  return (
-    <div className="App">
-      <Users />
-    </div>
-  );
+class App extends React.Component{
+  render(){
+    return (
+      <div className="App">
+        <Home />
+      </div>
+    );
+  }
 }
 
 export default App;
