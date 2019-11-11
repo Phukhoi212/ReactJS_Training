@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import { withRouter } from "react-router";
 import ReactPlayer from 'react-player'
 import NavBar from '../../components/NavBar/NavBar'
 import Card from '../../components/Card/Card'
@@ -13,7 +14,7 @@ const useStyles = () => ({
     width: 'inherit',
     height: 'inherit'
   },
-  title:{
+  title: {
     width: 'inherit',
     height: 80,
     backgroundColor: '#0202',
@@ -39,6 +40,7 @@ const useStyles = () => ({
     width: '50%',
     height: 500,
     backgroundColor: '#0505',
+    color: '#fff'
   },
   right: {
     width: '25%',
@@ -48,60 +50,38 @@ const useStyles = () => ({
 })
 
 class Detail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    }
-  }
-
-
   render() {
-    // const entry = get(this.state.listFilm.feed, 'entry', '')
-    // const image = get(entry, 'im:image.[2].label', '')
-    // const title = get(entry, 'im:name.label', '')
     const { classes } = this.props
     console.log('===>', this.props)
     return (
       <div className={classes.root}>
         <NavBar />
         <div className={classes.title}>
-          Fast and Ferious
+          {this.props.location.title}
         </div>
         <div className={classes.content}>
           <div className={classes.left}>
             <label className={classes.text}>GENRE</label>
+            {this.props.location.category}
             <label className={classes.text}>DIRECTOR</label>
+            {this.props.location.artist}
             <label className={classes.text}>RELESE DATE</label>
+            {this.props.location.releaseDay}
           </div>
           <div className={classes.description}>
-
+            <label>{this.props.location.summary}</label>
           </div>
           <div className={classes.right}>
-
+            <img src={this.props.location.image} alt=''/>
           </div>
-          
+
         </div>
-        {/* <ReactPlayer url='https://www.youtube.com/watch?v=dZFa22qfktM' playing /> */}
-        {/* <Card imageFilm={image} title={title} /> */}
       </div>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    listFilms: state.HomeReducers
-  }
-}
-
 
 export default compose(
-  withStyles(useStyles),
-  connect(
-    mapStateToProps,
-    {
-      fecthAllListFilm
-    }
-  )
-)(Detail)
+  withStyles(useStyles)
+)(withRouter(Detail))

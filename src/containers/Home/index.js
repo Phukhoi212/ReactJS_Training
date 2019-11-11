@@ -28,6 +28,7 @@ class Home extends Component {
     // const name = entry.map(en => get(en, '', ''))
     // const image = entry.map(en => get(en, 'im:image.[2].label', ''))
     // const id = entry.map(en => get(en, 'id.attributes.im:id', ''))
+    console.log('-->', entry)
 
     return (
       <div className="home-root">
@@ -39,6 +40,10 @@ class Home extends Component {
                 imageFilm={get(en, 'im:image.[2].label', '')}
                 title={get(en, 'im:name.label', '')}
                 id={get(en, 'id.attributes.im:id', '')}
+                artist={get(en, 'im:artist.label', '')}
+                category={get(en, 'category.attributes.label', '')}
+                releaseDay={get(en, 'im:releaseDate.attributes.label', '')}
+                description={get(en, 'summary.label', '')}
               />
             </Grid>
           )}
