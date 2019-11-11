@@ -90,7 +90,6 @@ class Detail extends Component {
   }
 }
 
-
 export default compose(
-  withStyles(useStyles)
+  withStyles(useStyles),
 )(withRouter(Detail))

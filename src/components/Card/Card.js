@@ -9,7 +9,8 @@ const useStyles = () => ({
     width: 200,
     height: 300,
     background: '#000',
-    margin: 15
+    margin: '0 auto',
+    marginTop: 20
   },
   image: {
     width: 200,
@@ -21,6 +22,12 @@ const useStyles = () => ({
 });
 
 class CardFilm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      films: []
+    }
+  }
 
   render() {
     const { classes } = this.props

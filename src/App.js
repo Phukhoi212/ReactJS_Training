@@ -8,8 +8,8 @@ class App extends React.Component {
   render() {
     return (
       <Router>
+        <NavBar />
         <div className="App">
-          <NavBar />
           {this.showContentMenus(routes)}
         </div>
       </Router>
