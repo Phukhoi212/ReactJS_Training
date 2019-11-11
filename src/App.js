@@ -2,13 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 import routes from './routes'
-import Home from '../src/containers/Home/index'
+import NavBar from './components/NavBar/NavBar'
 
 class App extends React.Component {
   render() {
     return (
       <Router>
         <div className="App">
+          <NavBar />
           {this.showContentMenus(routes)}
         </div>
       </Router>

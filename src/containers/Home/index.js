@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import compose from 'recompose/compose'
-import ReactPlayer from 'react-player'
-import NavBar from '../../components/NavBar/NavBar'
 import Card from '../../components/Card/Card'
 import { get } from 'lodash'
 import { connect } from 'react-redux'
 import { fecthAllListFilm } from './actions'
 import Grid from '@material-ui/core/Grid'
-import { Link as RouterLink } from 'react-router-dom'
 
 
 class Home extends Component {
@@ -28,11 +25,9 @@ class Home extends Component {
     // const name = entry.map(en => get(en, '', ''))
     // const image = entry.map(en => get(en, 'im:image.[2].label', ''))
     // const id = entry.map(en => get(en, 'id.attributes.im:id', ''))
-    console.log('-->', entry)
 
     return (
       <div className="home-root">
-        <NavBar />
         <Grid container>
           {entry.map(en =>
             <Grid item xs={3} key={get(en, 'id.attributes.im:id', '')}>
@@ -44,6 +39,8 @@ class Home extends Component {
                 category={get(en, 'category.attributes.label', '')}
                 releaseDay={get(en, 'im:releaseDate.attributes.label', '')}
                 description={get(en, 'summary.label', '')}
+                price={get(en, 'im:price.label', '')}
+                video={get(en, 'link.[1].attributes.href', '')}
               />
             </Grid>
           )}
@@ -62,5 +59,4 @@ const mapStateToProps = state => {
 export default compose(
   connect(mapStateToProps, {
   fecthAllListFilm
-}))
-  (Home)
+}))(Home)

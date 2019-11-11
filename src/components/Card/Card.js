@@ -2,11 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import { Link as RouterLink } from 'react-router-dom'
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { withRouter } from "react-router";
-import PropTypes from "prop-types";
 import Typography from '@material-ui/core/Typography';
-import Detail from '../../containers/Detail/index'
 
 const useStyles = () => ({
   card: {
@@ -26,19 +22,6 @@ const useStyles = () => ({
 
 class CardFilm extends React.Component {
 
-  static propTypes = {
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: ''
-    }
-  }
-
   render() {
     const { classes } = this.props
     return (
@@ -53,7 +36,9 @@ class CardFilm extends React.Component {
               artist: this.props.artist,
               category: this.props.category,
               releaseDay: this.props.releaseDay,
-              summary: this.props.description
+              summary: this.props.description,
+              price: this.props.price,
+              video: this.props.video
             }}
           >
             <img className={classes.image} src={this.props.imageFilm} alt='' />
@@ -66,5 +51,5 @@ class CardFilm extends React.Component {
     );
   }
 }
-export default withStyles(useStyles)(withRouter(CardFilm))
+export default withStyles(useStyles)(CardFilm)
 
