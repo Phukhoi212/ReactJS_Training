@@ -3,7 +3,7 @@ import compose from 'recompose/compose'
 import Card from '../../components/Card/Card'
 import { get } from 'lodash'
 import { connect } from 'react-redux'
-import { fecthAllListFilm, filmDetail } from './actions'
+import { fecthAllListFilm } from './actions'
 import Grid from '@material-ui/core/Grid'
 
 
@@ -35,12 +35,6 @@ class Home extends Component {
                 imageFilm={get(en, 'im:image.[2].label', '')}
                 title={get(en, 'im:name.label', '')}
                 id={get(en, 'id.attributes.im:id', '')}
-                artist={get(en, 'im:artist.label', '')}
-                category={get(en, 'category.attributes.label', '')}
-                releaseDay={get(en, 'im:releaseDate.attributes.label', '')}
-                description={get(en, 'summary.label', '')}
-                price={get(en, 'im:price.label', '')}
-                video={get(en, 'link.[1].attributes.href', '')}
               />
             </Grid>
           )}
@@ -52,13 +46,11 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    listFilms: state.HomeReducers,
-    detail: state.HomeReducers
+    listFilms: state.HomeReducers
   }
 }
 
 export default compose(
   connect(mapStateToProps, {
-    fecthAllListFilm,
-    filmDetail
+    fecthAllListFilm
   }))(Home)

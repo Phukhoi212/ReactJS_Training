@@ -1,8 +1,8 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
+import React from 'react'
+import { withStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
 import { Link as RouterLink } from 'react-router-dom'
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = () => ({
   card: {
@@ -38,14 +38,6 @@ class CardFilm extends React.Component {
             exact='true'
             to={{
               pathname: `/detail/${this.props.id}`,
-              title: this.props.title,
-              image: this.props.imageFilm,
-              artist: this.props.artist,
-              category: this.props.category,
-              releaseDay: this.props.releaseDay,
-              summary: this.props.description,
-              price: this.props.price,
-              video: this.props.video
             }}
           >
             <img className={classes.image} src={this.props.imageFilm} alt='' />

@@ -12,8 +12,8 @@ const routes = [
     },
 
     {
-        path : '/detail',
-        exact : false,
+        path : '/detail/:id',
+        exact : true,
         main : () => <Detail />
     },
 

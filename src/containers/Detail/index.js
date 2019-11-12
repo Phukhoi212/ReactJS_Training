@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import { withRouter } from "react-router";
+import { withRouter } from "react-router"
+import { connect } from 'react-redux'
+import { get } from 'lodash'
+import { fecthAllListFilm } from '../Home/actions'
 import Trailer from '../../components/Dialog/Dialog'
 import compose from 'recompose/compose'
 
@@ -14,7 +17,7 @@ const useStyles = () => ({
     height: 60,
     color: '#fff'
   },
-  labelTitle:{
+  labelTitle: {
     fontSize: 20
   },
   content: {
@@ -56,40 +59,54 @@ const useStyles = () => ({
 })
 
 class Detail extends Component {
+
+  componentDidMount() {
+    this.props.fecthAllListFilm()
+  }
+
   render() {
     const { classes } = this.props
+    const entry = get(this.props.listFilms.feed, 'entry', [])
+    const selectedFilm = entry.find(en => en.id.attributes['im:id'] === this.props.match.params.id)
+
     return (
       <div className={classes.root}>
         <div className={classes.title}>
-          <label className={classes.labelTitle}>{this.props.location.title}</label>
+          <label className={classes.labelTitle}>{ get(selectedFilm, 'im:name.label', '')}</label>
         </div>
         <div className={classes.content}>
           <div className={classes.left}>
             <label className={classes.text}>GENRE</label>
-            <label style={{float: 'right', marginRight: 20}}>{this.props.location.category}</label>
+            <label style={{ float: 'right', marginRight: 20 }}>{ get(selectedFilm, 'category.attributes.label', '')}</label>
 
             <label className={classes.text}>DIRECTOR</label>
-            <label style={{float: 'right', marginRight: 20}}>{this.props.location.artist}</label>
+            <label style={{ float: 'right', marginRight: 20 }}>{ get(selectedFilm, 'im:artist.label', '')}</label>
 
             <label className={classes.text}>RELESE DATE</label>
-            <label style={{float: 'right', marginRight: 20}}> {this.props.location.releaseDay}</label>
+            <label style={{ float: 'right', marginRight: 20 }}> { get(selectedFilm, 'im:releaseDate.attributes.label', '')}</label>
 
           </div>
           <div className={classes.description}>
-            <label className={classes.buy}>Available to buy on iTunes for: {this.props.location.price}</label> <br></br>
-            <label>{this.props.location.summary}</label>
-            <Trailer url={this.props.location.video}/>
+            <label className={classes.buy}>Available to buy on iTunes for: {get(selectedFilm, 'im:price.label', '')}</label> <br></br>
+            <label>{ get(selectedFilm, 'summary.label', '')}</label>
+            <Trailer url={ get(selectedFilm, 'link.[1].attributes.href', '')} />
           </div>
           <div className={classes.right}>
-            <img className={classes.image} src={this.props.location.image} alt='' />
+            <img className={classes.image} src={ get(selectedFilm, 'im:image.[2].label', '')} alt='' />
           </div>
-
         </div>
       </div>
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    listFilms: state.HomeReducers
+  }
+}
 
 export default compose(
   withStyles(useStyles),
-)(withRouter(Detail))
+  connect(mapStateToProps, {
+    fecthAllListFilm
+  }))(withRouter(Detail))
