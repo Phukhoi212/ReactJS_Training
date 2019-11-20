@@ -3,19 +3,21 @@ import { withStyles } from '@material-ui/core/styles'
 import { withRouter } from "react-router"
 import { connect } from 'react-redux'
 import { get } from 'lodash'
-import { fecthAllListFilm } from '../Home/actions'
+import { fecthDetailFilm } from '../Home/actions'
 import Trailer from '../../components/Dialog/Dialog'
 import compose from 'recompose/compose'
 
 const useStyles = () => ({
   root: {
     width: 'inherit',
-    height: 'inherit'
+    height: 'inherit',
+    backgroundColor: "#1b1b1b"
   },
   title: {
     width: 'inherit',
     height: 60,
-    color: '#fff'
+    color: '#fff',
+    paddingTop: 20
   },
   labelTitle: {
     fontSize: 20
@@ -59,15 +61,13 @@ const useStyles = () => ({
 })
 
 class Detail extends Component {
-
   componentDidMount() {
-    this.props.fecthAllListFilm()
+    this.props.fecthDetailFilm(this.props.match.params.id)
   }
 
   render() {
     const { classes } = this.props
-    const entry = get(this.props.listFilms.feed, 'entry', [])
-    const selectedFilm = entry.find(en => en.id.attributes['im:id'] === this.props.match.params.id)
+    const selectedFilm = this.props.detail
 
     return (
       <div className={classes.root}>
@@ -101,12 +101,12 @@ class Detail extends Component {
 }
 const mapStateToProps = state => {
   return {
-    listFilms: state.HomeReducers
+    detail: state.HomeReducers
   }
 }
 
 export default compose(
   withStyles(useStyles),
   connect(mapStateToProps, {
-    fecthAllListFilm
+    fecthDetailFilm
   }))(withRouter(Detail))

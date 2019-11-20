@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './containers/Home/index';
 import Detail from './containers/Detail/index'
+import SignIn from './components/Login/Login'
 
 
 
@@ -16,6 +17,12 @@ const routes = [
         exact : true,
         main : () => <Detail />
     },
+
+    {
+        path: '/login',
+        exact: true,
+        main: () => <SignIn />
+    }
 
 ];
 
