@@ -38,9 +38,28 @@ const useStyles = theme => ({
 });
 
 class SignIn extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    }
+  }
+
+  onChangeEmail = (e) => {
+    this.setState({ email: e.target.value })
+  }
+
+  onChangePass = (e) => {
+    this.setState({ password: e.target.value })
+  }
+
+  onLogin = () => {
+
+  }
+
   render() {
     const { classes } = this.props;
-
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -56,6 +75,7 @@ class SignIn extends React.Component {
               margin="normal"
               required
               fullWidth
+              onChange={this.onChangeEmail}
               id="email"
               label="Email Address"
               name="email"
@@ -66,6 +86,7 @@ class SignIn extends React.Component {
               margin="normal"
               required
               fullWidth
+              onChange={this.onChangePass}
               name="password"
               label="Password"
               type="password"
@@ -83,6 +104,7 @@ class SignIn extends React.Component {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={this.onLogin}
             >
               Sign In
             </Button>
