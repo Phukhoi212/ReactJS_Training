@@ -5,12 +5,14 @@ import routes from "./routes";
 import NavBar from "./components/NavBar/NavBar";
 import fireAuth from "./FireBase";
 import Login from "./components/Login/Login";
+import * as firebase from 'firebase';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {}
+      user: {},
+      token: ""
     };
   }
 
@@ -22,6 +24,13 @@ class App extends React.Component {
     fireAuth.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ user });
+        firebase.auth().currentUser.getIdToken(true).then((idToken) => {
+          this.setState({
+            token: idToken
+          })
+        }).catch(function(error) {
+          // Handle error
+        });
       } else {
         this.setState({ user: null });
       }
@@ -29,6 +38,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log("token", this.state.token)
     return this.state.user ? (
       <Router>
         <div className="App">

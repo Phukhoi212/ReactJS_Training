@@ -9,9 +9,12 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import FingerprintIcon from "@material-ui/icons/Fingerprint";
 import Typography from "@material-ui/core/Typography";
+// import Snackbar from "@material-ui/core/Snackbar";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import fireAuth from "../../FireBase";
+// import IconButton from "@material-ui/core/IconButton";
+// import DoneIcon from "@material-ui/icons/Done";
 
 const useStyles = theme => ({
   "@global": {
@@ -43,32 +46,40 @@ class SignIn extends React.Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      error: "",
+      open: false
     };
   }
 
-  onChangeEmail = e => {
-    this.setState({ email: e.target.value });
+  onChangeValue = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
-  onChangePass = e => {
-    this.setState({ password: e.target.value });
+  handleClose = () => {
+    this.setState({ open: false });
   };
-
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
   onLogin = e => {
     e.preventDefault();
     fireAuth
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then()
+      .then(res => {
+        console.log('res', res)
+      })
       .catch(err => {
-        console.log("err", err);
+        this.setState({
+          error: err.message
+        });
       });
+    this.setState({ open: true });
   };
 
   render() {
     const { classes } = this.props;
-    console.log("props", this.props);
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -80,11 +91,14 @@ class SignIn extends React.Component {
             Sign In
           </Typography>
           <form className={classes.form} noValidate>
+            {/* <label style={{ color: "green" }}>
+              {this.state.error ? "Login Failed !!!" : "Login Sucess !!!"}
+            </label> */}
             <TextField
               margin="normal"
               required
               fullWidth
-              onChange={this.onChangeEmail}
+              onChange={this.onChangeValue}
               id="email"
               label="Email Address"
               name="email"
@@ -95,15 +109,18 @@ class SignIn extends React.Component {
               margin="normal"
               required
               fullWidth
-              onChange={this.onChangePass}
+              onChange={this.onChangeValue}
               name="password"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
             />
+            <label style={{ color: "red", fontStyle: "italic" }}>
+              {this.state.error}
+            </label>
             <FormControlLabel
-              style={{ float: "left" }}
+              style={{ float: "left", marginTop: 20 }}
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
@@ -131,6 +148,27 @@ class SignIn extends React.Component {
             </Grid>
           </form>
         </div>
+        {/* <Snackbar
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center"
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+          message={<span id="message-id">{"Login Sucess !!!"}</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              className={classes.close}
+              onClick={this.handleClose}
+            >
+              <DoneIcon />
+            </IconButton>
+          ]}
+        /> */}
       </Container>
     );
   }
