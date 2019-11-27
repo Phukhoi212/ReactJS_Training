@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { NavLink, withRouter } from "react-router-dom";
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import fireAuth from "../../FireBase"
 
 const useStyles = () => ({
   root: {
@@ -84,7 +85,7 @@ class NavBar extends React.Component {
   };
 
   handleLogOut = () => {
-    this.props.history.push("/login");
+    fireAuth.auth().signOut();
   };
 
   handleSelectCategory = () => {

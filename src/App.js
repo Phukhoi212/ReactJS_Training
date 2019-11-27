@@ -3,17 +3,40 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import routes from "./routes";
 import NavBar from "./components/NavBar/NavBar";
+import fireAuth from "./FireBase";
+import Login from "./components/Login/Login";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {}
+    };
+  }
+
+  componentDidMount(){
+    this.authListener()
+  }
+
+  authListener() {
+    fireAuth.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ user });
+      } else {
+        this.setState({ user: null });
+      }
+    });
+  }
+
   render() {
-    return (
+    return this.state.user ? (
       <Router>
         <div className="App">
           <NavBar />
           {this.showContentMenus(routes)}
         </div>
-      </Router>
-    );
+      </Router> 
+    ) : <Login />
   }
 
   showContentMenus = routes => {
