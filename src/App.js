@@ -25,20 +25,23 @@ class App extends React.Component {
       if (user) {
         this.setState({ user });
         firebase.auth().currentUser.getIdToken(true).then((idToken) => {
-          this.setState({
-            token: idToken
-          })
+          if(idToken){
+            this.setState({
+              token: idToken
+            })
+          } else {
+            this.setState({user: null})
+          }
         }).catch(function(error) {
           // Handle error
         });
       } else {
-        this.setState({ user: null });
+        this.setState({user: null});
       }
     });
   }
 
   render() {
-    console.log("token", this.state.token)
     return this.state.user ? (
       <Router>
         <div className="App">
