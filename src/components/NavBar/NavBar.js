@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { NavLink, withRouter } from "react-router-dom";
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import fireAuth from "../../FireBase"
+import fireAuth from "../../FireBase";
 
 const useStyles = () => ({
   root: {
@@ -45,6 +45,12 @@ const useStyles = () => ({
     alignItems: "center",
     padding: "0 !important"
   },
+  userLogin: {
+    height: "100%",
+    width: "20%",
+    alignItems: "center",
+    display: "flex",
+  },
   icons: {
     margin: "0 auto",
     backgroundColor: "#FFF",
@@ -57,7 +63,7 @@ const useStyles = () => ({
 class NavBar extends React.Component {
   state = {
     anchorEl: "",
-    category: ""
+    category: "",
   };
 
   handleClickOpenProFile = event => {
@@ -90,7 +96,7 @@ class NavBar extends React.Component {
 
   handleSelectCategory = () => {
     this.handleCloseCategory();
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -121,10 +127,14 @@ class NavBar extends React.Component {
                 className="pop-menu"
                 variant="menu"
               >
-                <MenuItem onClick={this.handleSelectCategory}>Action & Adventure</MenuItem>
+                <MenuItem onClick={this.handleSelectCategory}>
+                  Action & Adventure
+                </MenuItem>
                 <MenuItem onClick={this.handleSelectCategory}>Comedy</MenuItem>
                 <MenuItem onClick={this.handleSelectCategory}>Horror</MenuItem>
-                <MenuItem onClick={this.handleSelectCategory}>Kids & Family</MenuItem>
+                <MenuItem onClick={this.handleSelectCategory}>
+                  Kids & Family
+                </MenuItem>
               </Menu>
             </li>
 
@@ -138,7 +148,9 @@ class NavBar extends React.Component {
               </NavLink>
             </li>
           </div>
-
+          <div className={classes.userLogin}>
+            <label style={{ color: "#fff" }}>Hello, {this.props.userLogin}</label>
+          </div>
           <div className={classes.btn}>
             <IconButton
               onClick={this.handleClickOpenProFile}

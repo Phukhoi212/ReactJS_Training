@@ -6,13 +6,14 @@ import NavBar from "./components/NavBar/NavBar";
 import fireAuth from "./FireBase";
 import Login from "./components/Login/Login";
 import * as firebase from 'firebase';
+import { get } from 'lodash'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: {},
-      token: ""
+      token: "",
     };
   }
 
@@ -42,10 +43,11 @@ class App extends React.Component {
   }
 
   render() {
+    const userName = get(this.state.user, "email", "");
     return this.state.user ? (
       <Router>
         <div className="App">
-          <NavBar />
+          <NavBar userLogin={userName} />
           {this.showContentMenus(routes)}
         </div>
       </Router> 
